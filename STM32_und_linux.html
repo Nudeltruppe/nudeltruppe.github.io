@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>STM32 und linux</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1 id="stm32-und-linux">STM32 und linux</h1>
+<h2 id="toolchain">Toolchain</h2>
+<p>Die arm toolchain kan <a href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">hier</a> heruntergeladen werden.<br>Die stlink utils können <a href="https://github.com/stlink-org/stlink">hier</a> heruntergeladen werden.</p>
+<h2 id="programme-kompilieren-make-">Programme kompilieren (make)</h2>
+<p>Um stm32 programme unter linux zu kompilieren, muss man folgende programme installiert haben</p>
+
+<ul>
+<li>make</li>
+<li>arm-none-eabi-gcc</li>
+<li>arm-none-eabi-objcopy</li>
+</ul>
+<p>Danach kann man <a href="https://github.com/Glowman554/stm32_nucleo_l152re">hier</a> ein Projekt template herunterladen.</p>
+<p>Mann kann folgende befehle benutzen um programme zu kompilieren/uploaden</p>
+
+<ul>
+<li><code>make app.bin</code> (output kann in dem bin Ordner gefunden werden)</li>
+<li><code>make upload NUCLEO_DRIVE=/path/to/device/file</code> (uploaded die bin Datei auf das board)</li>
+<li><code>make clean</code> (löscht alle kompilierten Dateien)</li>
+</ul>
+<h2 id="programme-debuggen-mit-gdb">Programme debuggen mit gdb</h2>
+<p>Um stm32 programme unter linux zu debuggen, muss man folgende programme installiert haben</p>
+
+<ul>
+<li>arm-none-eabi-gdb</li>
+<li>st-util</li>
+</ul>
+<p>1) St util muss mit dem Befehl <code>st-util</code> gestartet werden
+2) Danach kann man gdb mit <code>arm-none-eabi-gdb app.elf</code> in dem bin Ordner starten
+3) In der gdb shell muss man nun <code>target remote 127.0.0.1:4242</code> ausführen
+4) Als nächstes muss man <code>hb main</code> ausführen
+5) Nun kann man <code>continue</code> ausführen und auf dem stm32 board auf den reset button drücken. Gdb sollte nun bei main anhalten.</p>
+<p>Tip: man kann gdb diese befehle automatisch beim starten ausführen lassen indem man die -ex flag benutzt. Beispiel: <code>arm-none-eabi-gdb app.elf -ex &quot;target remote 127.0.0.1:4242&quot;</code><br>Tip: man kann mit <code>tui enable</code> eine viel übersichtlichere Ansicht kriegen<br>Tip: man kann mit <code>layout regs</code> sich die register dauerhaft während dem debuggen anzeigen lassen.  </p>
+
+	</div>
+
+	<footer style="padding-top: 1em;">
+		<p style="display: inline;">Page created 7.2.2022, 16:28:40, Page last updated 7.2.2022, 16:28:40</p>
+		<button onclick="window.print()">Print</button>
+	</footer>
+</body>
+</html>

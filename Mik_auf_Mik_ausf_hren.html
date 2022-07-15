@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Mik auf Mik ausführen</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1 id="ingredients-">Ingredients:</h1>
+
+<ul>
+<li>mic (Mik Compiler)</li>
+<li>mip (Für die initialisierung)</li>
+<li>clang or gcc</li>
+<li>linker (optional)</li>
+</ul>
+<h1 id="mik-code">Mik Code</h1>
+
+<pre><code class="lang-c">// ein simples programm in mik
+int a = 10
+int b = 10
+int c = a + b
+</code></pre>
+<p>Aber das hilft auf dem Mikrocontroller nichts.<br>Um Ergebnisse zu sehen können wir die LEDs einschalten:</p>
+
+<pre><code class="lang-c">// assembly funktion
+mikas setze_lichter(void* gpio_c, uint8 value) -&gt; void {
+    strb r1, [r0, 0x14]
+    bx lr
+}
+
+// call zu lichter_an mit der memory address von GPIOC. Diese steht in regs.s (dieser funktionsaufruf ist c code)
+setze_lichter((void*) 0x40020800, 0b011011011)
+</code></pre>
+<h1 id="compilen">Compilen</h1>
+<p>Hierzu erst den mik compiler (mic) runterladen. Dazu gibt es zwei optionen.</p>
+
+<ol>
+<li><p>Den passenden release von <a href="https://github.com/MikOS-ProgrammingLanguage/mic-mip/releases">github runterladen.</a></p>
+</li>
+<li><p>Den source code mit wget, curl oder git herunterladen.</p>
+</li>
+<li><p><code>wget https://github.com/MikOS-ProgrammingLanguage/mic-mip</code></p>
+</li>
+<li><code>curl -LJO https://github.com/MikOS-ProgrammingLanguage/mic-mip</code></li>
+<li><code>git clone https://github.com/MikOS-ProgrammingLanguage/mic-mip</code></li>
+</ol>
+<p>Dannach in den ordner gehen:</p>
+
+<ul>
+<li><code>cd mic-mip</code></li>
+</ul>
+<p>Dann entweder <code>mic -install</code> oder <code>bash build.sh .</code> ausführen.
+Jetzt ist der mik compiler bereit benutzt zu werden</p>
+<h2 id="mik-zu-c-oder-ll">Mik zu c oder ll</h2>
+<p>Um mik code zu compilen, folgenden command ausführen:</p>
+
+<ul>
+<li><code>./mic -c -i path_to_file.mik -o out_path.c</code></li>
+</ul>
+<p>Um mik code zu object files zu compilen:</p>
+
+<ul>
+<li><code>./mic -ll -i path_to_file.mik -o out_path</code></li>
+</ul>
+<p>Dannach entweder linken oder mit gcc oder clang mik zu executables compilen
+Für mehr info über das compilen bitte Janicks Artikel zu STM32 auf linux lesen.</p>
+
+	</div>
+
+	<footer style="padding-top: 1em;">
+		<p style="display: inline;">Page created 18.2.2022, 12:03:38, Page last updated 3.3.2022, 08:15:57</p>
+		<button onclick="window.print()">Print</button>
+	</footer>
+</body>
+</html>

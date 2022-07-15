@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Sprungmarken (Labels)</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<p>Ein Label in Assembly ähnelt einer Funktion in z.B. Java. Auch benötigt man einen sogenannten &quot;Entry point&quot;. Dieser ist vergleichbar mit der main Funktion in Java. Der Entry point ist der Punkt im Programm von dem an Linear ausgeführt wird.</p>
+<p>Beispiel: Das folgende Programm quadriert 2</p>
+
+<pre><code class="lang-main:">    mov R0, #2
+    b quadrieren --------
+                         |
+quadrieren:        &lt;-----     
+    mul R1, R0, R0 &lt;----- 1.
+</code></pre>
+<p>Nun ist in R1 4 (2^2)</p>
+<p>Man kann auch aus Labels Returnen. Mehr dazu <a href="https://www.mikki.gq/wiki/view#493095_296183">hier</a></p>
+<p>Ein weiteres Beispiel um das Springen zwischen labels weiter zu verdeutlichen wäre folgendes: Ein Programm das unendlich R0 += 1 rechnet</p>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infinte
+
+add_infinite:
+    add R0, #1
+    b add_infinite
+</code></pre>
+<h3 id="1-schritt-nach-start-des-programms">1. Schritt nach start des Programms</h3>
+
+<pre><code>main:
+    mov R0, #0       &lt;=== Jetzt steht in R0 0
+    b add_infinte
+
+add_infinite:
+    add R0, #1
+    b add_infinite
+</code></pre>
+<h3 id="2-schritt">2. Schritt</h3>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infint     &lt;=== Springt zu add_infinite
+
+add_infinite:
+    add R0, #1
+    b add_infinite
+</code></pre>
+<h3 id="3-schritt">3. Schritt</h3>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infint
+
+add_infinite:
+    add R0, #1       &lt;=== Addiert auf R0 1
+    b add_infinite
+</code></pre>
+<h3 id="4-schritt">4. Schritt</h3>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infint
+
+add_infinite:
+    add R0, #1
+    b add_infinite   &lt;=== Springt zu add_infinite
+</code></pre>
+<p>Die Nächsten Schritte werden sich unendlich wiederholen</p>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infint
+
+add_infinite:
+    add R0, #1       &lt;=== Addiert auf R0 1
+    b add_infinite
+</code></pre>
+
+<pre><code>main:
+    mov R0, #0
+    b add_infint
+
+add_infinite:
+    add R0, #1
+    b add_infinite   &lt;=== Springt zu add_infinite
+</code></pre>
+
+	</div>
+
+	<footer style="padding-top: 1em;">
+		<p style="display: inline;">Page created 7.2.2022, 20:34:10, Page last updated 7.2.2022, 21:53:55</p>
+		<button onclick="window.print()">Print</button>
+	</footer>
+</body>
+</html>

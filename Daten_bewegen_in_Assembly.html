@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Daten bewegen in Assembly</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1 id="daten-bewegen-in-assembly">Daten bewegen in Assembly</h1>
+<h2 id="instruktionen">Instruktionen</h2>
+
+<ul>
+<li>mov</li>
+<li>strb</li>
+<li>ldr</li>
+</ul>
+<h1 id="mov-move-">mov (move)</h1>
+
+<pre><code>// Nutzungsbeispiel:
+mov R0, #1234
+</code></pre>
+<p>Der mov (move) Befehl wird genutzt, um Register (R0, R1, ...) mit werten zu füllen. Möglich sind andere Register (z.B.: <code>mov R0, R1</code>) oder Zahlen (z.B.: <code>mov R0, #0xff</code>).</p>
+<h1 id="strb-store-byte-">strb (store byte)</h1>
+
+<pre><code>// Nutzungsbeispiel:
+strb R0, [R1, ODR] // speichert Wert in R0 in ODR von R1
+</code></pre>
+<p>Der strb (store byte) Befehl wird benutzt um einen Byte (links) in eine Adresse* (rechts) zu speichern.</p>
+
+<ul>
+<li>Adressen:
+  Adressen werden in Assembly immer mit [] ausgedrückt.</li>
+</ul>
+<h1 id="ldr-load-register-">ldr (load register)</h1>
+
+<pre><code>// Nutzungsbeispiel
+ldr R1, =GPIOC
+</code></pre>
+<p>Der ldr Befehl wird verwendet um eine 32-bit* Konstante vom Speicher in ein Register zu laden.</p>
+<p>*32-bit Konstante:
+    Es gibt auch andere Größeneinheiten die ähnliche befehle haben. Z.B.: ldrh (load half word) lädt eine 16-bit Konstante und ldrb (load byte) lädt, wie der Name schon sagt, eine 8-bit Konstante</p>
+
+	</div>
+
+	<footer style="padding-top: 1em;">
+		<p style="display: inline;">Page created 7.2.2022, 22:13:45, Page last updated 9.2.2022, 19:31:10</p>
+		<button onclick="window.print()">Print</button>
+	</footer>
+</body>
+</html>

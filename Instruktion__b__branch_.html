@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Instruktion: b (branch)</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1 id="instruktion-b-branch-">Instruktion: b (branch)</h1>
+<p>Die instruktion <code>b</code> wird benutzt um von einem codeblock zu einem anderen zu springen.<br>Bei der ausfürung wird das link register(<code>lr</code>) nicht gesetzt was heist, dass return (bx lr) nicht möglich ist!  </p>
+
+<pre><code class="lang-arm-asm">loop: &lt;-------------------|
+                          |
+  // andere instruktionen |
+  b loop -----------------|
+</code></pre>
+
+	</div>
+
+	<footer style="padding-top: 1em;">
+		<p style="display: inline;">Page created 7.2.2022, 08:42:20, Page last updated 25.3.2022, 11:52:02</p>
+		<button onclick="window.print()">Print</button>
+	</footer>
+</body>
+</html>
